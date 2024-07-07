@@ -2,3 +2,4 @@
 .cache
 .hypothesis
 *html
+__pycache__
