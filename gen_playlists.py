@@ -1,18 +1,17 @@
 import requests
 import webbrowser
 
+
 def get_client_id():
-    with open("client_id") as f:
+    with open("client_id.txt") as f:
         client_id = f.readline().strip("\n")
     return client_id
 
 def get_client_secret():
-    with open("client_secret") as f:
+    with open("client_secret.txt") as f:
         client_secret = f.readline().strip("\n")
+    return client_secret
 
-scope = ["user-read-email", "user-read-private", "playlist-modify-private"]
-
-redirect_uri = "http://localhost:7777/callback"
 
 
 def get_access_token():
@@ -29,7 +28,14 @@ def get_access_token():
     response = requests.get(url, params, allow_redirects=True)
     webbrowser.open(response.url)
 
-def get_auth_header(token):
-    return {"Authorization": "Bearer " + token}
 
-token = get_access_token()
+if __name__ == '__main__':
+
+    client_id = get_client_id()
+    client_secret = get_client_secret()
+
+    scope = ["user-read-email", "user-read-private", "playlist-modify-private", "playlist-modify-public"]
+
+    redirect_uri = "http://localhost:7777/callback"
+
+    token = get_access_token()
